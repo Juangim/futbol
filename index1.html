@@ -4,36 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #display {
+            width: 40%;
+            border: 3px solid blue;
+            border-radius: 10px;
+            height: 100px;
+            margin: auto;
+            overflow: auto;
+            padding: 10px;
+        }
+        #imagen{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Equipos de futbol</h1>
+    <h1 id="titulo">Manejo de Arrays</h1>
+    <button onclick="diceAlineacion()">Alimeacion</button>
+    <button onclick="imprimeAlineacion()">Imprimir La Alineacion</button>
+    <img id="imagen" src="" alt="" width="100%" height="100%">
+    <div id="display"></div>
+    <h1>Equipos de Futbol</h1>
     <label for="equipo">Equipo</label>
-    <select onchange="cambiEquipo()" id="equipo">
-        <option value="ninguno">Elija el Equipo</option>
-        <option value="rm">Real Madrid</option>
+    <select onchange="cambiaEquipo()" name="" id="equipo">
+
+        <option value="ninguno">Elija Equipo</option>
+        <option value="rm">Real Madird</option>
         <option value="bar">Barcelona</option>
+        
     </select>
-    <img src="" id="imagen" width="200" height="200">
+        <img src="" alt="" id="imagen2">
+        <h1 id="titulo2"></h1>
+        <div id="display3"></div>
 
     <script>
-        function cambiEquipo(){
-            let equipoObj = document.getElementById("equipo")
-            let equipovalor = equipoObj.value
-            cambiaImagen(equipovalor)
+
+        let alineacion = ["Messi", "Cristiano", "Zidane", "Figo", "Butragueño"]
+
+        function diceAlineacion() {
+            alineacion.push("Santillana");
+            alineacion.push("Juanito");
+            alineacion.unshift("Di Stefano");
+            alert("Hay " + alineacion.length + " jugadores");
+            let posicion = prompt("Dime posicion");
+            if (posicion >= alineacion.length) {
+                alert("No hay jugadores ");
+            } else {
+                alert("En la posicion " + posicion + " juega " + alineacion[posicion]);
+            }
         }
 
+        function imprimeAlineacion() {
+            let display = document.getElementById("display");
+            display.innerHTML = "<ol>";
+
+            for (let i = 0; i < alineacion.length; i++) {
+                display.innerHTML = display.innerHTML + "<li>" + alineacion[i] + "</li>";
+            }
+            display.innerHTML = display.innerHTML + "</ol>";
+            display.style.backgroundColor = "yellow";
+            display.style.width = "30%";
+            document.getElementById("titulo").style.color = "red";
+        }
+       
+        function cambiaEquipo(){
+                let equipoObj = document.getElementById("equipo")
+                let equipoValor = equipoObj.value
+                cambiaImagen(equipoValor)
+        }        
         function cambiaImagen(equipo){
-            let imagen = document.getElementById("imagen")
-            if(equipo == "rm"){
-                imagen.src = "realMadrid.png"
+            let imagen = document.getElementById("imagen2")
+            let titulo2 = document.getElementById("titulo2")
+            realmadrid= ["Bale", "Ronaldo", "Cristiano","Butragueño"]
+            barcelona= ["Ter", "Andres","Pedro","Messi","Iniesta"]
+
+            if (equipo =="rm"){
+                imagen.src="realmadrid.png"
+                titulo2.innerHTML="Alineacion del Real Madrid"
+                imagen.style.display="block"
             }
-            if(equipo == "bar"){
-                imagen.src = "barcelona.png"
+            if (equipo == "bar"){
+                imagen.src="barcelona.png"
+                titulo2.innerHTML="Alineacion del Barcelona"
+                imagen.style.display="block"
+
+            }if (equipo == "ninguno"){
+                titulo2.innerHTML=""
+                imagen.style.display="none"
+
             }
-            if(equipo == "ninguno"){
-                imagen.src = ""
+            function ImprimirAlineacion(alineacion){
+                display3 =document.getElementById("display3")
+                for (let i=0;i<alineacion.length;i++){
+                    display.innerHTML+=alineacion[i]+"<br>"
+                }
             }
         }
+
+
     </script>
 </body>
 </html>
